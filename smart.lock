@@ -1,0 +1,20 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "accounts-linkedin": {}
+    },
+    "packages": {
+      "accounts-linkedin": {
+        "git": "https://github.com/yefim/meteor-accounts-linkedin.git",
+        "tag": "v0.0.6",
+        "commit": "58ae8fc9da845c2eabcacc5cc6a238af6189d19d"
+      },
+      "linkedin": {
+        "git": "https://github.com/yefim/meteor-linkedin.git",
+        "tag": "v0.0.2",
+        "commit": "c3bac682ea0edd19e58b9172e708f91616888ba0"
+      }
+    }
+  }
+}

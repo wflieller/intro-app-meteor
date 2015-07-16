@@ -1,0 +1,30 @@
+<head>
+    <title>intro-app</title>
+</head>
+
+<body>
+    <h1>Welcome to Intro!</h1> 
+    {{> loginButtons}}
+    {{> main}}
+</body>
+<template name="main">
+    <h1>Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Comment</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>{{profile.firstName}}</td>
+                <td>...</td>
+                <td>{{profile.lastName}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>
