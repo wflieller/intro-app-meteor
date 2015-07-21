@@ -1,7 +1,7 @@
 Router.map(function() {
 	
   this.route('map', {
-    path: '/',
+    path: '/map',
     data: function () {
       Session.set("currentPhoto", null);
     }
@@ -15,9 +15,15 @@ Router.map(function() {
   });
   this.route('camera-page');
   this.route("list");
-  this.route("profile");
+  this.route("profile", {
+    template: "profile",
+    path: 'profile/:_id'
+  });
   this.route("friends");
-  this.route("register");
+  this.route("register", {
+    template: "register",
+    path: "/"
+  });
 });
 
 Router.configure({
