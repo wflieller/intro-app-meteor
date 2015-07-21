@@ -1,12 +1,82 @@
 <head>
-    <title>intro-app</title>
+  <title>Intro</title>
+  <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2V8IFYwB-Syx2-lauWq8EgjNmS7b8fMY">
+  </script>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 
-<body>
-    <h1>Welcome to Intro!</h1> 
+<template name="map">
+  <div class="google-map">
+    {{> googleMap
+      geolocate=true
+      markers=markers
+      selectedMarkerId=selectedMarkerId}}
+  </div>
+</template>
+
+<template name="list">
+  {{#each photos}}
+    <div class="card">
+      <a href="/map/{{_id}}" class="item item-image">
+        <img src="{{image}}" />
+      </a>
+    </div>
+  {{/each}}
+</template>
+
+<template name="camera-page">
+  {{> camera}}
+</template>
+
+<template name="layout">
+  <div class="bar bar-header bar-stable">
+    <h1 class="title">Intro</h1>
+    <button class="button button-clear pull-right photo-link button-positive"><i class="icon ion-camera"></i>Check in</button>
+    {{#if currentUser}}
     {{> loginButtons}}
-    {{> profile}}
-</body>
+    {{/if}}
+  </div>
+
+  <div class="content">
+    {{> yield}}
+  </div>
+
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item {{#if '/map'}}positive{{/if}} {{#if onPage 'mapWithPhoto'}}positive{{/if}}" href="/">
+      <i class="icon ion-earth"></i>
+      Map
+    </a>
+    <a class="tab-item {{#if onPage '/list'}}positive{{/if}}" href="/list">
+      <i class="icon ion-location"></i>
+      Nearby Intro's
+    </a>
+    <a class="tab-item {{#if '/profile'}}positive{{/if}}" href="/profile">
+      <i class="icon ion-person"></i>
+      Profile
+    </a>
+    <a class="tab-item {{#if '/friends'}}positive{{/if}}" href="/friends">
+      <i class="icon ion-person-stalker"></i>
+      Friends
+    </a>
+
+  </div>
+</template>
+
+<template name="friends">
+Friends Updates
+
+
+
+</template>
+<template name="register">
+Registration page
+{{> loginButtons}}
+
+
+
+</template>
+
 <template name="profile">
     <h1>Profile</h1>
     <table>
@@ -21,16 +91,16 @@
             </tr>
         </thead>
         <tbody>
-            <!-- {{#each users}} -->
+            
             <tr>
-                <td>{{currentUser._id}}</td>
-                <td>{{currentUser.profile.firstName}}</td>
-                <td>{{currentUser.profile.lastName}}</td>
-                <td>{{currentUser.profile.headline}}</td>
-                <td>{{currentUser.profile.emailAddress}}</td>
+                <td>{{currentUser._id}} </td>
+                <td>{{currentUser.profile.firstName}} </td>
+                <td>{{currentUser.profile.lastName}} </td>
+                <td>{{currentUser.profile.headline}} </td>
+                <td>{{currentUser.profile.emailAddress}} </td>
                 <td>{{currentUser.profile.location.name}}</td>
             </tr>
-         <!--    {{/each}} -->
+
         </tbody>
     </table>
 </template>
