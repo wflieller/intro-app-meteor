@@ -1,106 +1,200 @@
 <head>
-  <title>Intro</title>
-  <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2V8IFYwB-Syx2-lauWq8EgjNmS7b8fMY">
-  </script>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Intro</title>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2V8IFYwB-Syx2-lauWq8EgjNmS7b8fMY">
+    </script>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 
+
+
+<!-- Map Template -->
 <template name="map">
-  <div class="google-map">
-    {{> googleMap
-      geolocate=true
-      markers=markers
-      selectedMarkerId=selectedMarkerId}}
-  </div>
-</template>
-
-<template name="list">
-  {{#each photos}}
-    <div class="card">
-      <a href="/map/{{_id}}" class="item item-image">
-        <img src="{{image}}" />
-      </a>
+    <div class="google-map">
+        {{> googleMap 
+        geolocate=true 
+        markers=markers 
+        selectedMarkerId=selectedMarkerId
+        }}
     </div>
-  {{/each}}
 </template>
 
+
+
+<!-- Nearby Check-in List -->
+<template name="list">
+    {{#each photos}}
+    <div class="span2">
+        <div class="card">
+            <a href="/map/{{_id}}" class="item item-image">
+                <img src="{{image}}" />
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</template>
+
+
+
+<!-- The Camera Page -->
 <template name="camera-page">
-  {{> camera}}
+    {{> camera}}
 </template>
 
-<template name="layout">
-  <div class="bar bar-header bar-stable">
-    <h1 class="title">Intro</h1>
-    <button class="button button-clear pull-right photo-link button-positive"><i class="icon ion-camera"></i>Check in</button>
-    {{#if currentUser}}
-    {{> loginButtons}}
-    {{/if}}
-  </div>
 
-  <div class="content">
-    {{> yield}}
-  </div>
 
-  <div class="tabs tabs-icon-top">
-    <a class="tab-item {{#if '/map'}}positive{{/if}} {{#if onPage 'mapWithPhoto'}}positive{{/if}}" href="/">
-      <i class="icon ion-earth"></i>
-      Map
-    </a>
-    <a class="tab-item {{#if onPage '/list'}}positive{{/if}}" href="/list">
-      <i class="icon ion-location"></i>
-      Nearby Intro's
-    </a>
-    <a class="tab-item {{#if '/profile'}}positive{{/if}}" href="/profile">
-      <i class="icon ion-person"></i>
-      Profile
-    </a>
-    <a class="tab-item {{#if '/friends'}}positive{{/if}}" href="/friends">
-      <i class="icon ion-person-stalker"></i>
-      Friends
-    </a>
-
-  </div>
-</template>
-
+<!-- Friends Updates Page -->
 <template name="friends">
-Friends Updates
+    <div class="well well-large">
+        <h1>Friends Updates</h1>
+    </div>
+        
+    <div class="span2">
+    {{>sidebar}}
+    </div>
+    <div class="span10">
+    <label for="posttext">Update Status</label><br>
+        <input placeholder="What's happening?" class="input-xxlarge posttext" type="text" name="posttext" value="" id="posttext">
+    
+    <ul id="postList" class="unstyled">
+        {{#each posts}}
+        {{>post}}
+        {{/each}}
 
-
+    </ul>
+    </div>
 
 </template>
-<template name="register">
-Registration page
-{{> loginButtons}}
 
 
-
+<!-- Sidebar Template -->
+<template name="sidebar">
+<h2>Favorites</h2>
+<ul id="sideBar" class="unstyled">
+<li><a href="#">Updates</a></li>
+<li><a href="#">Messages</a></li>
+<li><a href="#">Events</a></li>
+<li><a href="#">Find Friends</a></li>
+</ul>
 </template>
 
-<template name="profile">
-    <h1>Profile</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>| User Id |</th>
-                <th>| First Name |</th>
-                <th>| Last Name |</th>
-                <th>| Headline |</th>
-                <th>| Email Address |</th>
-                <th>| Location |</th>
-            </tr>
-        </thead>
-        <tbody>
+
+
+<!-- Update Template -->
+<template name="post">
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img width="60px" src="{{this.owner.profile.pictureUrl}}" class="media-object" data-src="">
+        </a>
+        <div class="media-body">
+          <h6>{{this.owner.profile.firstName}}</h6>
+          <p>{{text}}</p>
+
             
-            <tr>
-                <td>{{currentUser._id}} </td>
-                <td>{{currentUser.profile.firstName}} </td>
-                <td>{{currentUser.profile.lastName}} </td>
-                <td>{{currentUser.profile.headline}} </td>
-                <td>{{currentUser.profile.emailAddress}} </td>
-                <td>{{currentUser.profile.location.name}}</td>
-            </tr>
+            <div class="media">
+            {{#if likeCount}}
+            <span class="badge badge-success">{{likeCount}}</span>
+            People Like This{{/if}}
+            <h4 class="media-heading">
+            <a class="likebtn muted"><small>Like</small></a>
+            </h4>
+            <ul class="unstyled">
+            {{#each postComments}}
+          {{>postcomment}}
+          {{/each}}
+          </ul>
+          <input class="comment input-xxlarge" type="text" name="comment" value="" placeholder="Write a comment" id="comment">
+          <hr>
+                
+            </div>
+        </div>
+    </div>
+</template>
 
-        </tbody>
-    </table>
+<!-- Comment Template -->
+<template name="postcomment">
+  <li class="well">
+    <a class="pull-left" href="/user">
+    <img src="{{owner.profile.pictureUrl}}" width="30px" class="img-rounded" alt="#">
+    </a>
+    <p class="muted commentUser">{{owner.profile.firstName}}</p>
+    <p class="muted commentText">{{text}}</p>
+    
+  </li>
+</template>
+
+
+<!-- Registration Page -->
+<template name="register">
+    <div class="jumbotron">
+        <div id="registration">
+            <h1>Welcome to Intro</h1>
+            <p>We make introductions easy!</p>
+            {{> loginButtons}}
+        </div>
+    </div>
+</template>
+
+
+
+<!-- User Profile Page -->
+<template name="profile">
+    <div class="well well-large">
+        <h1>Profile</h1>
+    </div>
+    <div class="span6">
+        <div class="well well-large">
+            <img src="{{currentUser.profile.pictureUrl}}">
+            <h2><strong>User Id: </strong></h2>
+            <h4>{{currentUser._id}}</h4>
+            <h2><strong>First Name: </strong></h2>
+            <h4>{{currentUser.profile.firstName}}</h4>
+            <h2><strong>Last Name: </strong></h2>
+            <h4>{{currentUser.profile.lastName}} </h4>
+            <h2><strong>Position: </strong></h2>
+            <h4>{{currentUser.profile.headline}}</h4>
+            <h2><strong>Email Address: </strong></h2>
+            <h4>{{currentUser.profile.emailAddress}}</h4>
+            <h2><strong>Location: </strong></h2>
+            <h4>{{currentUser.profile.location.name}}</h4>
+            <h2><strong>LinkedIn Profile: </strong></h2>
+            <h4><a href="{{currentUser.profile.publicProfileUrl}}">{{currentUser.profile.publicProfileUrl}}</a></h4>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="well well-large">
+            <h2>Recent Check-In's</h2>
+        </div>
+    </div>
+</template>
+
+
+
+<!-- Page Layout -->
+<template name="layout">
+    <div class="bar bar-header bar-stable">
+        <h1 class="title">Intro</h1>
+        <button class="button button-clear pull-right photo-link"><i class="icon ion-camera custom-icon">Check in</i></button>
+        {{#if currentUser}} {{> loginButtons}} {{/if}}
+    </div>
+    <div class="content">
+        {{> yield}}
+    </div>
+
+    <div class="tabs tabs-icon-top">
+    {{#if currentUser}}
+        <a class="tab-item {{#if onPage 'map'}}positive{{/if}} {{#if onPage 'mapWithPhoto'}}positive{{/if}}" href="/map">
+            <i class="icon ion-earth"></i> Map
+        </a>
+        <a class="tab-item {{#if onPage 'list'}}positive{{/if}}" href="/list">
+            <i class="icon ion-location"></i> Nearby Intro's
+        </a>
+        
+        <a class="tab-item {{#if onPage 'profile'}}positive{{/if}}" href="/profile/:_id">
+            <i class="icon ion-person"></i> Profile
+        </a>
+        <a class="tab-item {{#if onPage 'friends'}}positive{{/if}}" href="/friends">
+            <i class="icon ion-person-stalker"></i> Friends
+        </a>
+        {{/if}}
+    </div>
 </template>
