@@ -23,7 +23,8 @@ Router.map(function() {
     template: "profile",
     path: 'profile/:_id'
   });
-  this.route("friends");
+  this.route("updates");
+  this.route("social");
   this.route("signin")
 });
 

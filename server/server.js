@@ -22,5 +22,11 @@ Meteor.methods({
   },
   'removeAllPosts': function(){
     Posts.remove({});
-  }
+  },
+  'likePost': function(id){
+  	Likes.insert({_id:id});
+  },
+  'removePhoto': function(id){
+    Photos.remove({_id:id});
+  },
 })

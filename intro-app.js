@@ -2,6 +2,7 @@ Photos = new Meteor.Collection("photos");
 Posts = new Meteor.Collection('posts');
 Likes = new Meteor.Collection('likes');
 
+
 if (Meteor.isClient) {
     var selectedMarkerId = new Blaze.ReactiveVar(null);
 
@@ -62,9 +63,17 @@ if (Meteor.isClient) {
         photos: function() {
             return Photos.find({}, {sort: {"createdAt": -1}
             });
+        },
+        createdAt: function() {
+            return moment(this.date).fromNow();
         }
     });
 
+    Template.list.events({
+      'click .remove': function() {
+            Meteor.call("removePhoto", this._id);
+      }
+    })
 
 
     Template.post.likeCount = function() {
@@ -82,18 +91,31 @@ if (Meteor.isClient) {
               var options = {text: commenttext, parent:this._id};
               Meteor.call('addPost', options);
               $('.comment').val('').select().focus();
-    }
-  }
-})
+            }
+      },
+      'click .remove': function() {
+            Meteor.call("removePost", this._id);
+      },
+      'click .like': function() {
+            Meteor.call("likePost", this._id);
+      }
 
-    Template.friends.rendered = function() {
+    })
+
+    Template.updates.helpers({
+      isOwner: function() {
+            return this.owner === Meteor.userId();
+        }
+    })
+
+    Template.updates.rendered = function() {
         Deps.autorun(function() {
             Meteor.subscribe("posts", Meteor.userId());
             Meteor.subscribe("likes");
         })
     }
 
-    Template.friends.posts = function() {
+    Template.updates.posts = function() {
         return Posts.find({parent:null}, {
             sort: {
                 date: -1
@@ -101,7 +123,7 @@ if (Meteor.isClient) {
         });
     }
 
-    Template.friends.events({
+    Template.updates.events({
         'keyup .posttext': function(evt, tmpl) {
             if (evt.which === 13) {
                 var posttext = tmpl.find('.posttext').value;
@@ -111,6 +133,20 @@ if (Meteor.isClient) {
             }
         }
     })
+
+    Template.social.helpers({
+    opts: function() {
+      var opts ={
+        facebook: true,
+        twitter: true,
+        pinterest: false,
+        shareData: {
+          url: 'http://www.intro-app.meteor.com'
+        }
+      };
+      return opts;
+    }
+  });
     
 }
 
