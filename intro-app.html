@@ -172,8 +172,9 @@
 <template name="layout">
     <div class="bar bar-header bar-stable">
         <h1 class="title">Intro</h1>
+        {{#if currentUser}}
         <button class="button button-clear pull-right photo-link"><i class="icon ion-camera custom-icon">Check in</i></button>
-        {{#if currentUser}} {{> loginButtons}} {{/if}}
+        {{> loginButtons}} {{/if}}
     </div>
     <div class="content">
         {{> yield}}
