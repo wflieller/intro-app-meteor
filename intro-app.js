@@ -90,7 +90,6 @@ if (Meteor.isClient) {
         Deps.autorun(function() {
             Meteor.subscribe("posts", Meteor.userId());
             Meteor.subscribe("likes");
-            Meteor.subscribe("photos");
         })
     }
 

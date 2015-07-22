@@ -123,8 +123,8 @@
 </template>
 
 
-<!-- Registration Page -->
-<template name="register">
+<!-- Login Page -->
+<template name="signin">
     <div class="jumbotron">
         <div id="registration">
             <h1>Welcome to Intro</h1>
@@ -144,8 +144,7 @@
     <div class="span6">
         <div class="well well-large">
             <img src="{{currentUser.profile.pictureUrl}}">
-            <h2><strong>User Id: </strong></h2>
-            <h4>{{currentUser._id}}</h4>
+            
             <h2><strong>First Name: </strong></h2>
             <h4>{{currentUser.profile.firstName}}</h4>
             <h2><strong>Last Name: </strong></h2>
@@ -182,7 +181,7 @@
 
     <div class="tabs tabs-icon-top">
     {{#if currentUser}}
-        <a class="tab-item {{#if onPage 'map'}}positive{{/if}} {{#if onPage 'mapWithPhoto'}}positive{{/if}}" href="/map">
+        <a class="tab-item {{#if onPage 'map'}}positive{{/if}} {{#if onPage 'mapWithPhoto'}}positive{{/if}}" href="/">
             <i class="icon ion-earth"></i> Map
         </a>
         <a class="tab-item {{#if onPage 'list'}}positive{{/if}}" href="/list">
