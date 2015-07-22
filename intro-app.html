@@ -28,10 +28,14 @@
             <a href="/map/{{_id}}" class="item item-image">
                 <img src="{{image}}" />
             </a>
+            {{ createdAt}}
+            <i class="remove icon ion-close-circled"></i>
+            <i class="like icon ion-checkmark-circled"></i>
         </div>
     </div>
     {{/each}}
 </template>
+
 
 
 
@@ -42,8 +46,9 @@
 
 
 
-<!-- Friends Updates Page -->
-<template name="friends">
+
+<!-- Status Update Template -->
+<template name="updates">
     <div class="well well-large">
         <h1>Friends Updates</h1>
     </div>
@@ -52,42 +57,56 @@
     {{>sidebar}}
     </div>
     <div class="span10">
+    <div class="well well-large">
     <label for="posttext">Update Status</label><br>
-        <input placeholder="What's happening?" class="input-xxlarge posttext" type="text" name="posttext" value="" id="posttext">
-    
+        <input placeholder="What's on your mind?" class="input-xxlarge posttext" type="text" name="posttext" value="" id="posttext">
+        </div>
+        <hr>
+
+    <div class="well well-large">
     <ul id="postList" class="unstyled">
         {{#each posts}}
         {{>post}}
+        
         {{/each}}
 
     </ul>
     </div>
+    </div>
 
 </template>
+
+
 
 
 <!-- Sidebar Template -->
 <template name="sidebar">
 <h2>Favorites</h2>
 <ul id="sideBar" class="unstyled">
-<li><a href="#">Updates</a></li>
+<li><a href="/updates">Updates</a></li>
 <li><a href="#">Messages</a></li>
 <li><a href="#">Events</a></li>
-<li><a href="#">Find Friends</a></li>
+<li><a href="#">Groups</a></li>
+<li><a href="/social">Find Friends</a></li>
 </ul>
 </template>
 
 
 
-<!-- Update Template -->
+
+
+<!-- Post Template -->
 <template name="post">
     <div class="media">
         <a class="pull-left" href="#">
-            <img width="60px" src="{{this.owner.profile.pictureUrl}}" class="media-object" data-src="">
+            <img width="60px" src="{{owner.profile.pictureUrl}}" class="media-object" data-src="">
         </a>
         <div class="media-body">
-          <h6>{{this.owner.profile.firstName}}</h6>
+          <h6>{{owner.profile.firstName}}</h6>
           <p>{{text}}</p>
+          <i class="remove icon ion-close-circled"></i>
+          <i class="like icon ion-checkmark-circled"></i>
+          
 
             
             <div class="media">
@@ -110,6 +129,9 @@
     </div>
 </template>
 
+
+
+
 <!-- Comment Template -->
 <template name="postcomment">
   <li class="well">
@@ -118,12 +140,40 @@
     </a>
     <p class="muted commentUser">{{owner.profile.firstName}}</p>
     <p class="muted commentText">{{text}}</p>
+    <i class="remove icon ion-close-circled"></i>
+
+    
     
   </li>
 </template>
 
+<!-- Social Share Template -->
+<template name="social">
+  
+    <div class="well well-large">
+        <h1>Find or Invite Your Friend's</h1>
+         <div> {{> lmSocialShare opts=opts}} </div>
+    </div>
+        
+    <div class="span2">
+    {{>sidebar}}
+    </div>
+    <div class="span10">
 
-<!-- Login Page -->
+    <div class="well well-large">
+    {{#each Users}}
+    {{> _id.profile.firstName}}
+    {{> _id.profile.lastName}}
+    {{/each}}
+   
+    </div>
+    </div>
+    </template>
+
+
+
+
+<!-- Sign In Page -->
 <template name="signin">
     <div class="jumbotron">
         <div id="registration">
@@ -133,6 +183,8 @@
         </div>
     </div>
 </template>
+
+
 
 
 
@@ -168,6 +220,8 @@
 
 
 
+
+
 <!-- Page Layout -->
 <template name="layout">
     <div class="bar bar-header bar-stable">
@@ -192,7 +246,7 @@
         <a class="tab-item {{#if onPage 'profile'}}positive{{/if}}" href="/profile/:_id">
             <i class="icon ion-person"></i> Profile
         </a>
-        <a class="tab-item {{#if onPage 'friends'}}positive{{/if}}" href="/friends">
+        <a class="tab-item {{#if onPage 'friends'}}positive{{/if}}" href="/updates">
             <i class="icon ion-person-stalker"></i> Friends
         </a>
         {{/if}}
