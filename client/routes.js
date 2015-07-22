@@ -1,7 +1,11 @@
+Router.configure({
+  layoutTemplate: "layout"
+});
+
 Router.map(function() {
 	
   this.route('map', {
-    path: '/map',
+    path: '/',
     data: function () {
       Session.set("currentPhoto", null);
     }
@@ -20,12 +24,18 @@ Router.map(function() {
     path: 'profile/:_id'
   });
   this.route("friends");
-  this.route("register", {
-    template: "register",
-    path: "/"
-  });
+  this.route("signin")
 });
 
-Router.configure({
-  layoutTemplate: "layout"
-});
+var mustBeSignedIn = function(pause) {
+  if (!(Meteor.user() || Meteor.loggingIn())) {
+    Router.go('/signin');
+    this.next();
+  }
+  else {
+    this.next();
+  }
+};
+
+Router.onBeforeAction(mustBeSignedIn, {except: ['/signin']});
+
