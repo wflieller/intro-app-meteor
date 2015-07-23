@@ -32,6 +32,7 @@ if (Meteor.isClient) {
         Photos.insert({
             image: imageData,
             createdAt: new Date(),
+            owner:Meteor.userId(),
             marker: {
                 lat: latLng.lat,
                 lng: latLng.lng,
@@ -39,8 +40,11 @@ if (Meteor.isClient) {
             }
         });
 
+
+
         Router.go("/list");
     };
+    
 
     Template.layout.events({
         "click .photo-link": function() {
@@ -65,15 +69,22 @@ if (Meteor.isClient) {
             });
         },
         createdAt: function() {
-            return moment(this.date).fromNow();
+            return moment(this.createdAt).fromNow();
         }
     });
+    Template.list.likeCount = function() {
+        return Likes.find(this._id).count();
+    };
 
     Template.list.events({
       'click .remove': function() {
             Meteor.call("removePhoto", this._id);
+      },
+      'click .like': function() {
+            Meteor.call("likePhoto", this._id);
       }
     })
+
 
 
     Template.post.likeCount = function() {
