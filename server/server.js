@@ -6,6 +6,8 @@ Meteor.publish("likes", function(postid){
 	return Likes.find({post:postid});
 })
 
+
+
 Meteor.methods({
   // {text:'', owner:'', date:'', parent:''}
   'addPost': function(options){
@@ -28,5 +30,8 @@ Meteor.methods({
   },
   'removePhoto': function(id){
     Photos.remove({_id:id});
+  },
+  'likePhoto': function(id){
+  	Likes.insert({_id:id});
   },
 })
