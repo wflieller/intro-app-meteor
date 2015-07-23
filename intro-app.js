@@ -134,21 +134,20 @@ if (Meteor.isClient) {
         }
     })
 
-    Template.social.helpers({
-    opts: function() {
-      var opts ={
-        facebook: true,
-        twitter: true,
-        pinterest: false,
-        shareData: {
-          url: 'http://www.intro-app.meteor.com'
-        }
-      };
-      return opts;
-    }
-  });
-    
-}
+    Template.sidebar.helpers({
+      opts: function() {
+        var opts ={
+          facebook: true,
+          twitter: true,
+          pinterest: false,
+          shareData: {
+            url: 'http://www.intro-app.meteor.com'
+          }
+        };
+        return opts;
+      }
+    })
+  }
 
 
 

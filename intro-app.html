@@ -87,7 +87,9 @@
 <li><a href="#">Messages</a></li>
 <li><a href="#">Events</a></li>
 <li><a href="#">Groups</a></li>
-<li><a href="/social">Find Friends</a></li>
+<li><a href="/social">Find Friends</a></li><br>
+<li> Share Intro w/ Friends</li>
+<div> {{> lmSocialShare opts=opts}} </div>
 </ul>
 </template>
 
@@ -113,9 +115,6 @@
             {{#if likeCount}}
             <span class="badge badge-success">{{likeCount}}</span>
             People Like This{{/if}}
-            <h4 class="media-heading">
-            <a class="likebtn muted"><small>Like</small></a>
-            </h4>
             <ul class="unstyled">
             {{#each postComments}}
           {{>postcomment}}
@@ -151,8 +150,8 @@
 <template name="social">
   
     <div class="well well-large">
-        <h1>Find or Invite Your Friend's</h1>
-         <div> {{> lmSocialShare opts=opts}} </div>
+        <h1>Find Your Friend's</h1>
+         
     </div>
         
     <div class="span2">
@@ -161,9 +160,9 @@
     <div class="span10">
 
     <div class="well well-large">
-    {{#each Users}}
-    {{> _id.profile.firstName}}
-    {{> _id.profile.lastName}}
+    {{#each users}}
+    {{> user.profile.firstName}}
+    {{> user.profile.lastName}}
     {{/each}}
    
     </div>
