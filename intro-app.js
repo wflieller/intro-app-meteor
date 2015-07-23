@@ -33,6 +33,7 @@ if (Meteor.isClient) {
             image: imageData,
             createdAt: new Date(),
             owner:Meteor.userId(),
+            username: Meteor.user().profile.firstName,
             marker: {
                 lat: latLng.lat,
                 lng: latLng.lng,

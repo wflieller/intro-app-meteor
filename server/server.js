@@ -7,13 +7,13 @@ Meteor.publish("likes", function(postid){
 })
 
 
-
 Meteor.methods({
   // {text:'', owner:'', date:'', parent:''}
   'addPost': function(options){
     var post = {
       text:options.text,
       owner:Meteor.userId(),
+      username: Meteor.user().profile.firstName,
       date:new Date(),
       parent:options.parent
     }
