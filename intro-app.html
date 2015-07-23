@@ -7,16 +7,19 @@
 
 
 
+
+
 <!-- Map Template -->
 <template name="map">
     <div class="google-map">
         {{> googleMap 
         geolocate=true 
         markers=markers 
-        selectedMarkerId=selectedMarkerId
-        }}
+        selectedMarkerId=selectedMarkerId }}
     </div>
 </template>
+
+
 
 
 
@@ -28,13 +31,18 @@
             <a href="/map/{{_id}}" class="item item-image">
                 <img src="{{image}}" />
             </a>
+            {{username}}<br>
             {{ createdAt}}
             <i class="remove icon ion-close-circled"></i>
-            <i class="like icon ion-checkmark-circled"></i>
+            <i class="like icon ion-checkmark-circled"></i><br> 
+            {{#if likeCount}}
+            <span class="badge badge-success">{{likeCount}}</span> People Like This
+            {{/if}}
         </div>
     </div>
     {{/each}}
 </template>
+
 
 
 
@@ -47,50 +55,49 @@
 
 
 
+
 <!-- Status Update Template -->
 <template name="updates">
     <div class="well well-large">
         <h1>Friends Updates</h1>
     </div>
-        
     <div class="span2">
-    {{>sidebar}}
+        {{>sidebar}}
     </div>
     <div class="span10">
-    <div class="well well-large">
-    <label for="posttext">Update Status</label><br>
-        <input placeholder="What's on your mind?" class="input-xxlarge posttext" type="text" name="posttext" value="" id="posttext">
+        <div class="well well-large">
+            <label for="posttext">Update Status</label>
+            <br>
+            <input placeholder="What's on your mind?" class="input-xxlarge posttext" type="text" name="posttext" value="" id="posttext">
         </div>
         <hr>
-
-    <div class="well well-large">
-    <ul id="postList" class="unstyled">
-        {{#each posts}}
-        {{>post}}
-        
-        {{/each}}
-
-    </ul>
+        <div class="well well-large">
+            <ul id="postList" class="unstyled">
+                {{#each posts}} 
+                {{>post}} 
+                {{/each}}
+            </ul>
+        </div>
     </div>
-    </div>
-
 </template>
+
 
 
 
 
 <!-- Sidebar Template -->
 <template name="sidebar">
-<h2>Favorites</h2>
-<ul id="sideBar" class="unstyled">
-<li><a href="/updates">Updates</a></li>
-<li><a href="#">Messages</a></li>
-<li><a href="#">Events</a></li>
-<li><a href="#">Groups</a></li>
-<li><a href="/social">Find Friends</a></li><br>
-<li> Share Intro w/ Friends</li>
-<div> {{> lmSocialShare opts=opts}} </div>
-</ul>
+    <h2>Favorites</h2>
+    <ul id="sideBar" class="unstyled">
+        <li><a href="/updates">Updates</a></li>
+        <li><a href="#">Messages</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Groups</a></li>
+        <li><a href="/social">Find Friends</a></li>
+        <br>
+        <li> Share Intro w/ Friends</li>
+        <div> {{> lmSocialShare opts=opts}} </div>
+    </ul>
 </template>
 
 
@@ -104,25 +111,21 @@
             <img width="60px" src="{{owner.profile.pictureUrl}}" class="media-object" data-src="">
         </a>
         <div class="media-body">
-          <h6>{{owner.profile.firstName}}</h6>
-          <p>{{text}}</p>
-          <i class="remove icon ion-close-circled"></i>
-          <i class="like icon ion-checkmark-circled"></i>
-          
-
-            
+            <h6>{{username}}</h6>
+            <p>{{text}}</p>
+            <i class="remove icon ion-close-circled"></i>
+            <i class="like icon ion-checkmark-circled"></i>
             <div class="media">
-            {{#if likeCount}}
-            <span class="badge badge-success">{{likeCount}}</span>
-            People Like This{{/if}}
-            <ul class="unstyled">
-            {{#each postComments}}
-          {{>postcomment}}
-          {{/each}}
-          </ul>
-          <input class="comment input-xxlarge" type="text" name="comment" value="" placeholder="Write a comment" id="comment">
-          <hr>
-                
+                {{#if likeCount}}
+                <span class="badge badge-success">{{likeCount}}</span> People Like This
+                {{/if}}
+                <ul class="unstyled">
+                    {{#each postComments}} 
+                    {{>postcomment}} 
+                    {{/each}}
+                </ul>
+                <input class="comment input-xxlarge" type="text" name="comment" value="" placeholder="Write a comment" id="comment">
+                <hr>
             </div>
         </div>
     </div>
@@ -131,43 +134,40 @@
 
 
 
+
 <!-- Comment Template -->
 <template name="postcomment">
-  <li class="well">
-    <a class="pull-left" href="/user">
-    <img src="{{owner.profile.pictureUrl}}" width="30px" class="img-rounded" alt="#">
-    </a>
-    <p class="muted commentUser">{{owner.profile.firstName}}</p>
-    <p class="muted commentText">{{text}}</p>
-    <i class="remove icon ion-close-circled"></i>
-
-    
-    
-  </li>
+    <li class="well">
+        <a class="pull-left" href="/user">
+        </a>
+        <p class="muted commentUser">{{username}}</p>
+        <p class="muted commentText">{{text}}</p>
+        <i class="remove icon ion-close-circled"></i>
+    </li>
 </template>
+
+
+
+
 
 <!-- Social Share Template -->
 <template name="social">
-  
     <div class="well well-large">
         <h1>Find Your Friend's</h1>
-         
     </div>
-        
     <div class="span2">
-    {{>sidebar}}
+        {{>sidebar}}
     </div>
     <div class="span10">
+        <div class="well well-large">
+            {{#each users}} 
+            {{> user.profile.firstName}} 
+            {{> user.profile.lastName}} 
+            {{/each}}
+        </div>
+    </div>
+</template>
 
-    <div class="well well-large">
-    {{#each users}}
-    {{> user.profile.firstName}}
-    {{> user.profile.lastName}}
-    {{/each}}
-   
-    </div>
-    </div>
-    </template>
 
 
 
@@ -195,7 +195,6 @@
     <div class="span6">
         <div class="well well-large">
             <img src="{{currentUser.profile.pictureUrl}}">
-            
             <h2><strong>First Name: </strong></h2>
             <h4>{{currentUser.profile.firstName}}</h4>
             <h2><strong>Last Name: </strong></h2>
@@ -224,24 +223,25 @@
 <!-- Page Layout -->
 <template name="layout">
     <div class="bar bar-header bar-stable">
-        <h1 class="title">Intro</h1>
+        <h1 class="title">Intro</h1> 
         {{#if currentUser}}
         <button class="button button-clear pull-right photo-link"><i class="icon ion-camera custom-icon">Check in</i></button>
-        {{> loginButtons}} {{/if}}
+        {{> loginButtons}} 
+        {{/if}}
     </div>
+
     <div class="content">
         {{> yield}}
     </div>
 
     <div class="tabs tabs-icon-top">
-    {{#if currentUser}}
+        {{#if currentUser}}
         <a class="tab-item {{#if onPage 'map'}}positive{{/if}} {{#if onPage 'mapWithPhoto'}}positive{{/if}}" href="/">
             <i class="icon ion-earth"></i> Map
         </a>
         <a class="tab-item {{#if onPage 'list'}}positive{{/if}}" href="/list">
             <i class="icon ion-location"></i> Nearby Intro's
         </a>
-        
         <a class="tab-item {{#if onPage 'profile'}}positive{{/if}}" href="/profile/:_id">
             <i class="icon ion-person"></i> Profile
         </a>
