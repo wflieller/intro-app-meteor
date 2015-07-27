@@ -4,17 +4,17 @@ Intro is a social application that makes networking introductions easier by allo
 
 #Technologies Used
 
-meteor-platform
-mrt:moment
-iron:router
-ionic
-accounts-ui
-accounts-linkedin
-google-maps
-mdg:reload-on-resume
-mdg:geolocation
-mdg:camera
-bootstrap
-jquery
-accounts-base
-lukemadera:social-share
+meteor-platform,
+mrt:moment,
+iron:router,
+ionic,
+accounts-ui,
+accounts-linkedin,
+google-maps,
+mdg:reload-on-resume,
+mdg:geolocation,
+mdg:camera,
+bootstrap,
+jquery,
+accounts-base,
+lukemadera:social-share.
