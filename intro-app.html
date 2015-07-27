@@ -108,7 +108,7 @@
 <template name="post">
     <div class="media">
         <a class="pull-left" href="#">
-            <img width="60px" src="{{owner.profile.pictureUrl}}" class="media-object" data-src="">
+            <img width="60px" src="{{profilePic}}" class="media-object" data-src="">
         </a>
         <div class="media-body">
             <h6>{{username}}</h6>
@@ -139,7 +139,9 @@
 <template name="postcomment">
     <li class="well">
         <a class="pull-left" href="/user">
+        <img width="60px" src="{{profilePic}}" class="media-object" data-src="">
         </a>
+
         <p class="muted commentUser">{{username}}</p>
         <p class="muted commentText">{{text}}</p>
         <i class="remove icon ion-close-circled"></i>
@@ -161,8 +163,8 @@
     <div class="span10">
         <div class="well well-large">
             {{#each users}} 
-            {{> user.profile.firstName}} 
-            {{> user.profile.lastName}} 
+            {{> user._id.profile.firstName}} 
+            {{> user._id.profile.lastName}} 
             {{/each}}
         </div>
     </div>
@@ -172,12 +174,12 @@
 
 
 
-<!-- Sign In Page -->
+<!-- Sign-In Page -->
 <template name="signin">
     <div class="jumbotron">
         <div id="registration">
             <h1>Welcome to Intro</h1>
-            <p>We make introductions easy!</p>
+            <p>Where we try to make networking easier!</p>
             {{> loginButtons}}
         </div>
     </div>

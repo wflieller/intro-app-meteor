@@ -13,6 +13,7 @@ Meteor.methods({
     var post = {
       text:options.text,
       owner:Meteor.userId(),
+      profilePic: Meteor.user().profile.pictureUrl,
       username: Meteor.user().profile.firstName,
       date:new Date(),
       parent:options.parent
