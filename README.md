@@ -1,6 +1,6 @@
 # Intro App - Built with Meteor
 
-Intro is a social application that makes networking introductions easier by allowing users the ability to check in to their current location and let other users meet up with them. It is an attempt at taking social networking off of the digital realm by acting like an easy and non-confrontational alternative to making a formal introduction.
+Intro is a social networking application that takes digital introductions off of the web and creates real world opportunities to network with others.  It is an attempt at acting like an easy and non-confrontational alternative to making a formal introduction.
 
 #Technologies Used
 
