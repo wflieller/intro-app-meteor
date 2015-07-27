@@ -4,6 +4,11 @@ Likes = new Meteor.Collection('likes');
 
 
 if (Meteor.isClient) {
+
+    // 
+    // Map/Camera helpers, events and functions
+    // 
+
     var selectedMarkerId = new Blaze.ReactiveVar(null);
 
 
@@ -64,6 +69,12 @@ if (Meteor.isClient) {
         }
     });
 
+
+    // 
+    // List helpers, events and functions
+    // 
+
+
     Template.list.helpers({
         photos: function() {
             return Photos.find({}, {sort: {"createdAt": -1}
@@ -73,6 +84,7 @@ if (Meteor.isClient) {
             return moment(this.createdAt).fromNow();
         }
     });
+
     Template.list.likeCount = function() {
         return Likes.find(this._id).count();
     };
@@ -86,6 +98,9 @@ if (Meteor.isClient) {
       }
     })
 
+    // 
+    // Post helpers, events and functions
+    // 
 
 
     Template.post.likeCount = function() {
@@ -113,6 +128,10 @@ if (Meteor.isClient) {
       }
 
     })
+
+    // 
+    // Updates helpers, events and functions
+    // 
 
     Template.updates.helpers({
       isOwner: function() {
@@ -145,6 +164,12 @@ if (Meteor.isClient) {
             }
         }
     })
+
+
+    // 
+    // Sidebar helpers
+    // 
+
 
     Template.sidebar.helpers({
       opts: function() {
