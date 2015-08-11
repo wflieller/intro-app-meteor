@@ -31,6 +31,9 @@
             <a href="/map/{{_id}}" class="item item-image">
                 <img src="{{image}}" />
             </a>
+            <a class="pull-left" href="{{linkedIn}}">
+            <img width="20px" src="{{profilePic}}" class="media-object" data-src="">
+            </a>
             {{username}}<br>
             {{ createdAt}}
             <i class="remove icon ion-close-circled"></i>
@@ -107,7 +110,7 @@
 <!-- Post Template -->
 <template name="post">
     <div class="media">
-        <a class="pull-left" href="#">
+        <a class="pull-left" href="{{linkedIn}}">
             <img width="60px" src="{{profilePic}}" class="media-object" data-src="">
         </a>
         <div class="media-body">
@@ -138,7 +141,7 @@
 <!-- Comment Template -->
 <template name="postcomment">
     <li class="well">
-        <a class="pull-left" href="/user">
+        <a class="pull-left" href="{{linkedIn}}">
         <img width="60px" src="{{profilePic}}" class="media-object" data-src="">
         </a>
 

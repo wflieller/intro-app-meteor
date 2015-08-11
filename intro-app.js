@@ -34,7 +34,9 @@ if (Meteor.isClient) {
             image: imageData,
             createdAt: new Date(),
             owner:Meteor.userId(),
+            profilePic: Meteor.user().profile.pictureUrl,
             username: Meteor.user().profile.firstName,
+            linkedIn: Meteor.user().profile.publicProfileUrl,
             marker: {
                 lat: latLng.lat,
                 lng: latLng.lng,
