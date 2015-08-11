@@ -11,10 +11,11 @@ Meteor.methods({
   // {text:'', owner:'', date:'', parent:''}
   'addPost': function(options){
     var post = {
-      text:options.text,
-      owner:Meteor.userId(),
+      text: options.text,
+      owner: Meteor.userId(),
       profilePic: Meteor.user().profile.pictureUrl,
       username: Meteor.user().profile.firstName,
+      linkedIn: Meteor.user().profile.publicProfileUrl,
       date:new Date(),
       parent:options.parent
     }
