@@ -176,7 +176,7 @@ if (Meteor.isClient) {
           twitter: true,
           pinterest: false,
           shareData: {
-            url: 'http://www.intro-app.meteor.com'
+            url: 'http://www.intro.walkerflieller.com'
           }
         };
         return opts;
