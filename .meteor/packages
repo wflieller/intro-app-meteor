@@ -7,7 +7,6 @@
 mrt:moment
 iron:router
 accounts-ui
-accounts-linkedin
 google-maps
 mdg:reload-on-resume
 mdg:geolocation
@@ -15,7 +14,6 @@ mdg:camera
 bootstrap
 jquery
 autopublish
-insecure
 accounts-base
 lukemadera:social-share
 standard-minifiers
@@ -32,3 +30,5 @@ ejson
 spacebars
 check
 driftyco:ionic
+pauli:accounts-linkedin
+pauli:linkedin
